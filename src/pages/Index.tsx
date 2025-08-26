@@ -9,14 +9,46 @@ import { Settings } from '../components/Settings';
 import { Sidebar } from '../components/Sidebar';
 import { MobileNavigation } from '../components/MobileNavigation';
 import { ThemeToggle } from '../components/ThemeToggle';
+import StoryModal from '../components/StoryModal';
 
-const Index = () => {
+interface IndexProps {
+  onSignOut: () => void;
+}
+
+const Index: React.FC<IndexProps> = ({ onSignOut }) => {
   const [currentView, setCurrentView] = useState<'home' | 'explore' | 'upload' | 'profile' | 'notifications' | 'messages' | 'settings'>('home');
+  const [storyModal, setStoryModal] = useState<{
+    isOpen: boolean;
+    story: {
+      id: string;
+      username: string;
+      avatar: string;
+      image: string;
+      timestamp: string;
+    } | null;
+  }>({
+    isOpen: false,
+    story: null
+  });
+
+  const openStoryModal = (story: any) => {
+    setStoryModal({
+      isOpen: true,
+      story
+    });
+  };
+
+  const closeStoryModal = () => {
+    setStoryModal({
+      isOpen: false,
+      story: null
+    });
+  };
 
   const renderContent = () => {
     switch (currentView) {
       case 'home':
-        return <Feed />;
+        return <Feed onStoryClick={openStoryModal} />;
       case 'explore':
         return <Explore />;
       case 'upload':
@@ -28,9 +60,9 @@ const Index = () => {
       case 'messages':
         return <Messages />;
       case 'settings':
-        return <Settings />;
+        return <Settings onSignOut={onSignOut} />;
       default:
-        return <Feed />;
+        return <Feed onStoryClick={openStoryModal} />;
     }
   };
 
@@ -67,6 +99,13 @@ const Index = () => {
         
         <MobileNavigation currentView={currentView} onViewChange={setCurrentView} />
       </div>
+
+      {/* Story Modal */}
+      <StoryModal
+        isOpen={storyModal.isOpen}
+        onClose={closeStoryModal}
+        story={storyModal.story}
+      />
     </div>
   );
 };
