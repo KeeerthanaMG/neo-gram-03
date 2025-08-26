@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Instagram Clone Design System - Neumorphism & Glassmorphism */
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --background: 240 10% 96%;
+    --foreground: 240 10% 10%;
+    
+    /* Instagram Inspired Gradients */
+    --instagram-gradient: linear-gradient(135deg, 
+      hsl(315 100% 70%) 0%, 
+      hsl(350 100% 65%) 25%, 
+      hsl(25 100% 65%) 50%, 
+      hsl(45 100% 70%) 75%, 
+      hsl(315 100% 70%) 100%);
+    
+    --glass-gradient: linear-gradient(135deg, 
+      hsla(0 0% 100% / 0.1) 0%, 
+      hsla(0 0% 100% / 0.05) 100%);
+    
+    /* Neumorphism Colors */
+    --neuro-light: 240 15% 98%;
+    --neuro-dark: 240 8% 90%;
+    --neuro-shadow-light: 0 0% 100%;
+    --neuro-shadow-dark: 240 8% 85%;
+    
+    /* Glass Elements */
+    --glass-bg: 0 0% 100% / 0.8;
+    --glass-border: 0 0% 100% / 0.2;
+    --glass-shadow: 0 0% 0% / 0.1;
+    
+    /* Interactive States */
+    --primary: 315 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 10% 94%;
+    --secondary-foreground: 240 10% 20%;
+    
+    /* Accent Colors */
+    --accent: 350 100% 65%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 240 8% 92%;
+    --muted-foreground: 240 5% 50%;
+    
+    /* Surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+    
+    /* Borders & Inputs */
+    --border: 240 8% 88%;
+    --input: 240 8% 92%;
+    --ring: 315 100% 60%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --radius: 1rem;
+  }
+
+  .dark {
+    /* Dark Mode - Instagram Dark Theme */
+    --background: 240 10% 8%;
+    --foreground: 240 8% 95%;
+    
+    /* Dark Neumorphism */
+    --neuro-light: 240 10% 12%;
+    --neuro-dark: 240 10% 6%;
+    --neuro-shadow-light: 240 15% 15%;
+    --neuro-shadow-dark: 240 20% 4%;
+    
+    /* Dark Glass */
+    --glass-bg: 240 10% 10% / 0.8;
+    --glass-border: 240 8% 90% / 0.1;
+    --glass-shadow: 0 0% 0% / 0.3;
+    
+    --card: 240 10% 10%;
+    --card-foreground: 240 8% 95%;
+    --popover: 240 10% 10%;
+    --popover-foreground: 240 8% 95%;
+    
+    --secondary: 240 10% 15%;
+    --secondary-foreground: 240 8% 85%;
+    
+    --muted: 240 10% 12%;
+    --muted-foreground: 240 5% 60%;
+    
+    --border: 240 10% 20%;
+    --input: 240 10% 15%;
+    
+    --accent: 350 100% 65%;
+    --accent-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Neumorphic Card */
+  .neuro-card {
+    background: hsl(var(--neuro-light));
+    box-shadow: 
+      8px 8px 16px hsl(var(--neuro-shadow-dark)),
+      -8px -8px 16px hsl(var(--neuro-shadow-light));
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+  }
+  
+  /* Glass Card */
+  .glass-card {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: 0 8px 32px hsl(var(--glass-shadow));
+    border-radius: var(--radius);
+  }
+  
+  /* Inset Shadow */
+  .neuro-inset {
+    box-shadow: 
+      inset 4px 4px 8px hsl(var(--neuro-shadow-dark)),
+      inset -4px -4px 8px hsl(var(--neuro-shadow-light));
+  }
+  
+  /* Instagram Gradient Text */
+  .gradient-text {
+    background: var(--instagram-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Floating Animation */
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* Pulse Glow */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+    }
+  }
+  
+  /* Smooth Scale Animation */
+  .scale-hover {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scale-hover:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Heart Animation */
+  .heart-animate {
+    animation: heartBeat 0.6s ease-in-out;
+  }
+  
+  @keyframes heartBeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Story Ring - Static Background */
+  .story-ring {
+    background: conic-gradient(from 0deg, 
+      hsl(315 100% 70%), 
+      hsl(350 100% 65%), 
+      hsl(25 100% 65%), 
+      hsl(45 100% 70%), 
+      hsl(315 100% 70%)
+    );
+  }
+  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Shimmer Effect */
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  /* Bounce Animation */
+  .bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  @keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Slide up animation */
+  .slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground));
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
